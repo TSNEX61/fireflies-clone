@@ -7,6 +7,7 @@ import { Meeting } from "@/types";
 import {
   Mic2, Clock, CheckSquare, Users, ArrowRight, Plus, TrendingUp, Calendar,
 } from "lucide-react";
+import GlobalSearchModal from "@/components/GlobalSearchModal";
 
 function formatDuration(secs: number) {
   const h = Math.floor(secs / 3600);
@@ -35,6 +36,13 @@ const avatarColors = [
 function HomeContent() {
   const [meetings, setMeetings] = useState<Meeting[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setIsSearchOpen(true);
+    window.addEventListener("open-global-search", handler);
+    return () => window.removeEventListener("open-global-search", handler);
+  }, []);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/meetings")
@@ -190,6 +198,7 @@ function HomeContent() {
           </div>
         </main>
       </div>
+      <GlobalSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
   );
 }

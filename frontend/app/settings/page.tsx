@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import { ToastProvider, useToast } from "@/components/Toast";
-import { Settings, Save, Shield, Mail, Globe, Sliders, User, Building } from "lucide-react";
+import { Settings, Save, Shield, Mail, Globe, Sliders, User, Building, Moon } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const STORAGE_KEY = "fireflies-settings";
 
@@ -41,6 +42,7 @@ function saveSettings(data: SettingsData) {
 
 function SettingsContent() {
   const { showToast } = useToast();
+  const { theme, toggleTheme } = useTheme();
   const [settings, setSettings] = useState<SettingsData>(defaultSettings);
   const [loaded, setLoaded] = useState(false);
 
@@ -187,6 +189,24 @@ function SettingsContent() {
                 <button type="button" onClick={() => update({ enableAskFred: !settings.enableAskFred })}
                   style={{ width: "40px", height: "22px", borderRadius: "11px", border: "none", cursor: "pointer", position: "relative", transition: "background 0.2s", background: settings.enableAskFred ? "var(--ff-green)" : "var(--ff-border)", flexShrink: 0 }}>
                   <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#fff", position: "absolute", top: "2px", left: settings.enableAskFred ? "20px" : "2px", transition: "left 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.15)" }} />
+                </button>
+              </div>
+            </div>
+
+            {/* Section 6: Appearance */}
+            <div style={{ padding: "24px", borderBottom: "1px solid var(--ff-border)" }}>
+              <h3 style={{ fontSize: "15px", fontWeight: 900, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+                <Moon style={{ width: "16px", height: "16px", color: "var(--ff-green)" }} />
+                Appearance
+              </h3>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div>
+                  <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--ff-text)" }}>Switch between light and dark theme</span>
+                  <span style={{ fontSize: "11px", color: "var(--ff-text-3)", display: "block" }}>Currently using {theme} mode.</span>
+                </div>
+                <button type="button" onClick={toggleTheme}
+                  style={{ width: "40px", height: "22px", borderRadius: "11px", border: "none", cursor: "pointer", position: "relative", transition: "background 0.2s", background: theme === "dark" ? "var(--ff-green)" : "var(--ff-border)", flexShrink: 0 }}>
+                  <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#fff", position: "absolute", top: "2px", left: theme === "dark" ? "20px" : "2px", transition: "left 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.15)" }} />
                 </button>
               </div>
             </div>

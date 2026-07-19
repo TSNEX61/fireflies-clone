@@ -213,3 +213,39 @@ button, a, input, select, textarea {
 .btn-press:active {
   transform: scale(0.97);
 }
+
+/* Dark mode */
+[data-theme="dark"] {
+  --ff-bg: #0f1117;
+  --ff-white: #1a1d27;
+  --ff-border: #2a2d3a;
+  --ff-text: #e8eaed;
+  --ff-text-2: #9aa0b0;
+  --ff-text-3: #6b7280;
+  --ff-green-light: rgba(0,195,137,0.12);
+  --ff-shadow-sm: 0 2px 6px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.15);
+  --ff-shadow-md: 0 6px 20px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.18);
+  --ff-shadow-lg: 0 16px 50px rgba(0,0,0,0.35), 0 6px 16px rgba(0,0,0,0.2);
+  --ff-shadow-xl: 0 28px 80px rgba(0,0,0,0.4), 0 10px 30px rgba(0,0,0,0.25);
+  --ff-shadow-card: 0 2px 8px rgba(0,0,0,0.2), 0 1px 4px rgba(0,0,0,0.12);
+  --ff-shadow-card-hover: 0 12px 40px rgba(0,0,0,0.3), 0 6px 16px rgba(0,0,0,0.2);
+}
+
+[data-theme="dark"] body {
+  background: var(--ff-bg);
+}
+
+[data-theme="dark"] .glass {
+  background: rgba(26,29,39,0.85);
+}
+
+/* Gradient overrides for dark mode */
+[data-theme="dark"] .gradient-hero,
+[data-theme="dark"] [style*="linear-gradient(160deg"] {
+  background: linear-gradient(160deg, #0f1117 0%, #141620 30%, #0f1117 70%, #12141d 100%) !important;
+}
+
+[data-theme="dark"] .gradient-card-green,
+[data-theme="dark"] [style*="linear-gradient(135deg, #e6faf5"] {
+  background: linear-gradient(135deg, rgba(0,195,137,0.08), rgba(0,195,137,0.03)) !important;
+}

@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import NewMeetingModal from "@/components/NewMeetingModal";
 import EditMeetingModal from "@/components/EditMeetingModal";
+import GlobalSearchModal from "@/components/GlobalSearchModal";
 import { ToastProvider, useToast } from "@/components/Toast";
 import { Meeting, Participant } from "@/types";
 import {
@@ -200,6 +201,8 @@ function MeetingsLibraryContent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editMeeting, setEditMeeting] = useState<Meeting | null>(null);
 
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   const [search, setSearch] = useState("");
   const [selectedParticipant, setSelectedParticipant] = useState("");
   const [dateFrom, setDateFrom] = useState("");
@@ -225,6 +228,12 @@ function MeetingsLibraryContent() {
       return next;
     });
   };
+
+  useEffect(() => {
+    const handler = () => setIsSearchOpen(true);
+    window.addEventListener("open-global-search", handler);
+    return () => window.removeEventListener("open-global-search", handler);
+  }, []);
 
   const fetchMeetings = async () => {
     setLoading(true);
@@ -433,6 +442,7 @@ function MeetingsLibraryContent() {
       </div>
 
       <NewMeetingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSuccess={fetchMeetings} />
+      <GlobalSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       {editMeeting && (
         <EditMeetingModal
           isOpen={!!editMeeting}

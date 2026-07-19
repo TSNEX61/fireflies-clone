@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { Bell, Clock, Share2, Check, MoreHorizontal } from "lucide-react";
+import { Bell, Clock, Share2, Check, MoreHorizontal, Search } from "lucide-react";
 
 const avatarColors = [
   { bg: "#e0f2fe", text: "#0369a1" },
@@ -144,6 +144,17 @@ export default function Navbar({ meeting, shareCopied, onShare, menuOpen, onMenu
             </div>
           </>
         )}
+
+        <button
+          className="p-[7px] rounded-lg flex items-center gap-1.5"
+          style={{ color: "var(--ff-text-3)", transition: "all 0.15s" }}
+          onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-bg)"; e.currentTarget.style.color = "var(--ff-text)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--ff-text-3)"; }}
+          onClick={() => window.dispatchEvent(new CustomEvent("open-global-search"))}
+        >
+          <Search className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline text-[10px] font-semibold" style={{ color: "var(--ff-text-3)" }}>&#8984;K</span>
+        </button>
 
         <button
           className="relative p-[7px] rounded-lg"

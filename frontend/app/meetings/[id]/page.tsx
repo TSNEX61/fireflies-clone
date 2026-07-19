@@ -13,6 +13,7 @@ import {
   Check, X, Plus, Edit2, Bot, ArrowUp, Bookmark, Headphones, MessageCircle,
   PanelLeftClose, PanelLeftOpen,
 } from "lucide-react";
+import { jsPDF } from "jspdf";
 
 function MeetingDetailContent() {
   const params = useParams();
@@ -244,6 +245,88 @@ function MeetingDetailContent() {
     URL.revokeObjectURL(url); showToast("Exported as TXT!", "success");
   };
 
+  const handleExportPDF = () => {
+    if (!meeting) return;
+    const doc = new jsPDF();
+    let y = 20;
+    const lineHeight = 7;
+    const margin = 20;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const maxLineWidth = pageWidth - 2 * margin;
+
+    const addText = (text: string, fontSize: number, isBold: boolean, color?: [number, number, number]) => {
+      doc.setFontSize(fontSize);
+      doc.setFont("helvetica", isBold ? "bold" : "normal");
+      if (color) doc.setTextColor(...color);
+      else doc.setTextColor(40, 40, 40);
+      const lines = doc.splitTextToSize(text, maxLineWidth);
+      lines.forEach((line: string) => {
+        if (y > 270) { doc.addPage(); y = 20; }
+        doc.text(line, margin, y);
+        y += lineHeight;
+      });
+    };
+
+    addText(meeting.title, 18, true);
+    y += 2;
+    addText(`Date: ${new Date(meeting.date).toLocaleString()}`, 11, false, [120, 120, 120]);
+    addText(`Duration: ${formatTime(meeting.duration_seconds)}`, 11, false, [120, 120, 120]);
+    y += 6;
+
+    if (meeting.summary) {
+      addText("Overview", 14, true);
+      y += 1;
+      addText(meeting.summary.overview_text, 11, false);
+      y += 4;
+      addText(`Keywords: ${meeting.summary.keywords.join(", ")}`, 11, false, [80, 80, 80]);
+      y += 6;
+    }
+
+    addText("Transcript", 14, true);
+    y += 2;
+    meeting.transcript_segments.forEach((s) => {
+      if (y > 260) { doc.addPage(); y = 20; }
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(40, 40, 40);
+      doc.text(`[${formatTime(s.start_time_seconds)}] ${s.speaker.name}:`, margin, y);
+      const speakerWidth = doc.getTextWidth(`[${formatTime(s.start_time_seconds)}] ${s.speaker.name}: `);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(60, 60, 60);
+      const textLines = doc.splitTextToSize(s.text, maxLineWidth - speakerWidth);
+      textLines.forEach((line: string, i: number) => {
+        if (y > 270) { doc.addPage(); y = 20; }
+        doc.text(line, margin + speakerWidth, y);
+        y += 5;
+      });
+      y += 2;
+    });
+
+    if (meeting.action_items.length > 0) {
+      y += 4;
+      addText("Action Items", 14, true);
+      y += 1;
+      meeting.action_items.forEach((ai) => {
+        if (y > 270) { doc.addPage(); y = 20; }
+        const checkbox = ai.is_complete ? "[x]" : "[ ]";
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(40, 40, 40);
+        const text = `${checkbox} ${ai.text}${ai.assignee ? ` (${ai.assignee.name})` : ""}`;
+        const lines = doc.splitTextToSize(text, maxLineWidth);
+        lines.forEach((line: string) => {
+          if (y > 270) { doc.addPage(); y = 20; }
+          doc.text(line, margin, y);
+          y += 5;
+        });
+        y += 1;
+      });
+    }
+
+    doc.save(`${meeting.title.replace(/\s+/g, "_")}_transcript.pdf`);
+    showToast("Exported as PDF!", "success");
+  };
+
   const handleSendChat = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!chatInput.trim() || !meeting) return;
@@ -403,6 +486,7 @@ function MeetingDetailContent() {
         <Navbar meeting={meeting} shareCopied={shareCopied} onShare={() => { navigator.clipboard.writeText(window.location.href).catch(() => {}); setShareCopied(true); setTimeout(() => setShareCopied(false), 2000); }} menuOpen={menuOpen} onMenuToggle={() => setMenuOpen(!menuOpen)} menuRef={menuRef} menuItems={[
           { label: "Export as Markdown", icon: Download, onClick: () => { handleExportMarkdown(); setMenuOpen(false); } },
           { label: "Export as TXT", icon: Download, onClick: () => { handleExportTxt(); setMenuOpen(false); } },
+          { label: "Export as PDF", icon: Download, onClick: () => { handleExportPDF(); setMenuOpen(false); } },
           { divider: true },
           { label: "Edit Details", icon: Edit3, onClick: () => { setIsEditOpen(true); setMenuOpen(false); } },
           { divider: true },
