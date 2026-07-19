@@ -8,6 +8,7 @@ import { ActionItem, Meeting } from "@/types";
 import { CheckSquare, Calendar, User, ExternalLink, ClipboardList, Plus, X } from "lucide-react";
 import Link from "next/link";
 import { Participant } from "@/types";
+import { API_BASE } from "@/lib/api";
 
 function TasksContent() {
   const { showToast } = useToast();
@@ -25,9 +26,9 @@ function TasksContent() {
     setLoading(true);
     try {
       const [tasksRes, meetingsRes, participantsRes] = await Promise.all([
-        fetch("http://localhost:8000/api/action-items"),
-        fetch("http://localhost:8000/api/meetings"),
-        fetch("http://localhost:8000/api/participants"),
+        fetch("${API_BASE}/api/action-items"),
+        fetch("${API_BASE}/api/meetings"),
+        fetch("${API_BASE}/api/participants"),
       ]);
       if (tasksRes.ok) setTasks(await tasksRes.json());
       if (meetingsRes.ok) setMeetings(await meetingsRes.json());
@@ -43,7 +44,7 @@ function TasksContent() {
 
   const handleToggleTask = async (taskId: number, currentStatus: boolean) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/action-items/${taskId}`, {
+      const res = await fetch(`${API_BASE}/api/action-items/${taskId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ is_complete: !currentStatus }),
@@ -66,7 +67,7 @@ function TasksContent() {
         const found = participants.find(p => p.name.toLowerCase() === newTaskAssignee.trim().toLowerCase());
         if (found) assigneeId = found.id;
       }
-      const res = await fetch("http://localhost:8000/api/action-items", {
+      const res = await fetch("${API_BASE}/api/action-items", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

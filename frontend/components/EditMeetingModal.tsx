@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { X, Check, Save, AlertCircle } from "lucide-react";
 import { useToast } from "@/components/Toast";
 import { Participant } from "@/types";
+import { API_BASE } from "@/lib/api";
 
 interface EditMeetingModalProps {
   isOpen: boolean;
@@ -37,7 +38,7 @@ export default function EditMeetingModal({
       setSelectedParticipants(currentParticipantIds);
       setError("");
 
-      fetch("http://localhost:8000/api/participants")
+      fetch("${API_BASE}/api/participants")
         .then((res) => res.json())
         .then((data) => setDbParticipants(data))
         .catch((err) => console.error("Error loading participants:", err));
@@ -63,7 +64,7 @@ export default function EditMeetingModal({
     setError("");
 
     try {
-      const res = await fetch(`http://localhost:8000/api/meetings/${meetingId}`, {
+      const res = await fetch(`${API_BASE}/api/meetings/${meetingId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { X, UploadCloud, FileText, Check, Plus, AlertCircle } from "lucide-react";
 import { useToast } from "@/components/Toast";
 import { Participant } from "@/types";
+import { API_BASE } from "@/lib/api";
 
 interface NewMeetingModalProps {
   isOpen: boolean;
@@ -32,7 +33,7 @@ export default function NewMeetingModal({ isOpen, onClose, onSuccess }: NewMeeti
 
   useEffect(() => {
     if (isOpen) {
-      fetch("http://localhost:8000/api/participants")
+      fetch("${API_BASE}/api/participants")
         .then((res) => res.json())
         .then((data) => setDbParticipants(data))
         .catch((err) => console.error("Error loading participants:", err));
@@ -107,7 +108,7 @@ export default function NewMeetingModal({ isOpen, onClose, onSuccess }: NewMeeti
         formData.append("file", uploadedFile);
       }
 
-      const res = await fetch("http://localhost:8000/api/meetings", {
+      const res = await fetch("${API_BASE}/api/meetings", {
         method: "POST",
         body: formData,
       });

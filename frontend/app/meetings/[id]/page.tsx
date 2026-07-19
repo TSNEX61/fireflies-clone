@@ -14,6 +14,7 @@ import {
   PanelLeftClose, PanelLeftOpen,
 } from "lucide-react";
 import { jsPDF } from "jspdf";
+import { API_BASE } from "@/lib/api";
 
 function MeetingDetailContent() {
   const params = useParams();
@@ -68,7 +69,7 @@ function MeetingDetailContent() {
 
   const loadMeetingDetails = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/api/meetings/${meetingId}`);
+      const res = await fetch(`${API_BASE}/api/meetings/${meetingId}`);
       if (res.ok) {
         const data = await res.json();
         setMeeting(data);
@@ -161,7 +162,7 @@ function MeetingDetailContent() {
 
   const handleToggleActionItem = async (itemId: number, currentStatus: boolean) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/action-items/${itemId}`, {
+      const res = await fetch(`${API_BASE}/api/action-items/${itemId}`, {
         method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ is_complete: !currentStatus })
       });
       if (res.ok) {
@@ -174,7 +175,7 @@ function MeetingDetailContent() {
   const handleAddActionItem = async () => {
     if (!newAiText.trim()) { showToast("Task description cannot be empty", "error"); return; }
     try {
-      const res = await fetch("http://localhost:8000/api/action-items", {
+      const res = await fetch("${API_BASE}/api/action-items", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ meeting_id: meetingId, text: newAiText.trim(), assignee_id: newAiAssigneeId > 0 ? newAiAssigneeId : null, is_complete: false })
       });
@@ -188,7 +189,7 @@ function MeetingDetailContent() {
 
   const handleDeleteActionItem = async (itemId: number) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/action-items/${itemId}`, { method: "DELETE" });
+      const res = await fetch(`${API_BASE}/api/action-items/${itemId}`, { method: "DELETE" });
       if (res.ok) {
         setMeeting((prev) => prev ? { ...prev, action_items: prev.action_items.filter((ai) => ai.id !== itemId) } : null);
         showToast("Action item deleted.", "success");
@@ -199,7 +200,7 @@ function MeetingDetailContent() {
   const handleUpdateActionItemText = async (itemId: number) => {
     if (!editingAiText.trim()) { showToast("Task text cannot be empty", "error"); return; }
     try {
-      const res = await fetch(`http://localhost:8000/api/action-items/${itemId}`, {
+      const res = await fetch(`${API_BASE}/api/action-items/${itemId}`, {
         method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: editingAiText.trim() })
       });
       if (res.ok) {
@@ -213,7 +214,7 @@ function MeetingDetailContent() {
   const handleDeleteMeeting = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8000/api/meetings/${meetingId}`, { method: "DELETE" });
+      const res = await fetch(`${API_BASE}/api/meetings/${meetingId}`, { method: "DELETE" });
       if (res.ok) { showToast("Meeting deleted.", "success"); router.push("/"); }
       else { showToast("Failed to delete meeting.", "error"); setLoading(false); }
     } catch { showToast("Server error.", "error"); setLoading(false); }
@@ -353,7 +354,7 @@ function MeetingDetailContent() {
   const handleAddBookmark = async () => {
     if (!bookmarkNote.trim()) { showToast("Bookmark note cannot be empty", "error"); return; }
     try {
-      const res = await fetch("http://localhost:8000/api/bookmarks", {
+      const res = await fetch("${API_BASE}/api/bookmarks", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ meeting_id: meetingId, timestamp_seconds: currentTime, note: bookmarkNote.trim() })
       });
@@ -368,7 +369,7 @@ function MeetingDetailContent() {
 
   const handleDeleteBookmark = async (id: number) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/bookmarks/${id}`, { method: "DELETE" });
+      const res = await fetch(`${API_BASE}/api/bookmarks/${id}`, { method: "DELETE" });
       if (res.ok) {
         setMeeting((prev) => prev ? { ...prev, bookmarks: prev.bookmarks.filter((b) => b.id !== id) } : null);
         showToast("Bookmark removed.", "success");
@@ -379,7 +380,7 @@ function MeetingDetailContent() {
   const handleAddComment = async () => {
     if (!commentText.trim()) { showToast("Comment cannot be empty", "error"); return; }
     try {
-      const res = await fetch("http://localhost:8000/api/comments", {
+      const res = await fetch("${API_BASE}/api/comments", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ meeting_id: meetingId, author_name: "Alex Sterling", text: commentText.trim(), timestamp_seconds: currentTime })
       });
@@ -394,7 +395,7 @@ function MeetingDetailContent() {
 
   const handleDeleteComment = async (id: number) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/comments/${id}`, { method: "DELETE" });
+      const res = await fetch(`${API_BASE}/api/comments/${id}`, { method: "DELETE" });
       if (res.ok) {
         setMeeting((prev) => prev ? { ...prev, comments: prev.comments.filter((c) => c.id !== id) } : null);
         showToast("Comment deleted.", "success");
@@ -409,7 +410,7 @@ function MeetingDetailContent() {
       (s) => currentTime >= s.start_time_seconds && currentTime <= s.end_time_seconds
     )?.speaker.name || "Unknown";
     try {
-      const res = await fetch("http://localhost:8000/api/soundbites", {
+      const res = await fetch("${API_BASE}/api/soundbites", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ meeting_id: meetingId, title: soundbiteTitle.trim(), from_seconds: soundbiteStart, to_seconds: soundbiteEnd, speaker_name: speaker })
       });
@@ -424,7 +425,7 @@ function MeetingDetailContent() {
 
   const handleDeleteSoundbite = async (id: number) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/soundbites/${id}`, { method: "DELETE" });
+      const res = await fetch(`${API_BASE}/api/soundbites/${id}`, { method: "DELETE" });
       if (res.ok) {
         setMeeting((prev) => prev ? { ...prev, soundbites: prev.soundbites.filter((s) => s.id !== id) } : null);
         showToast("Soundbite deleted.", "success");

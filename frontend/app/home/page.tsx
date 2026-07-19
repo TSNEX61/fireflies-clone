@@ -8,6 +8,7 @@ import {
   Mic2, Clock, CheckSquare, Users, ArrowRight, Plus, TrendingUp, Calendar,
 } from "lucide-react";
 import GlobalSearchModal from "@/components/GlobalSearchModal";
+import { API_BASE } from "@/lib/api";
 
 function formatDuration(secs: number) {
   const h = Math.floor(secs / 3600);
@@ -45,7 +46,7 @@ function HomeContent() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/meetings")
+    fetch("${API_BASE}/api/meetings")
       .then((r) => r.json())
       .then((data) => { setMeetings(data); setLoading(false); })
       .catch(() => setLoading(false));

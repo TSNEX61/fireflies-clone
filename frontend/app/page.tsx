@@ -13,6 +13,7 @@ import {
   Users, ChevronDown, Filter, MoreHorizontal, Edit3, Trash2, ExternalLink, Star
 } from "lucide-react";
 import Link from "next/link";
+import { API_BASE } from "@/lib/api";
 
 const SPEAKER_COLORS = [
   { bg: "#e8f4fd", text: "#2563eb" },
@@ -238,7 +239,7 @@ function MeetingsLibraryContent() {
   const fetchMeetings = async () => {
     setLoading(true);
     try {
-      let url = `http://localhost:8000/api/meetings?sort=${sortOrder}`;
+      let url = `${API_BASE}/api/meetings?sort=${sortOrder}`;
       if (search.trim()) url += `&search=${encodeURIComponent(search)}`;
       if (selectedParticipant) url += `&participant=${selectedParticipant}`;
       if (dateFrom) url += `&date_from=${new Date(dateFrom).toISOString()}`;
@@ -254,7 +255,7 @@ function MeetingsLibraryContent() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/participants")
+    fetch("${API_BASE}/api/participants")
       .then(r => r.json()).then(setDbParticipants).catch(() => {});
   }, []);
 
@@ -271,7 +272,7 @@ function MeetingsLibraryContent() {
 
   const handleDeleteMeeting = async (id: number) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/meetings/${id}`, { method: "DELETE" });
+      const res = await fetch(`${API_BASE}/api/meetings/${id}`, { method: "DELETE" });
       if (res.ok) { showToast("Meeting deleted", "success"); fetchMeetings(); }
       else showToast("Failed to delete", "error");
     } catch { showToast("Server offline", "error"); }

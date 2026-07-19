@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X, FileText, Clock, ChevronRight } from "lucide-react";
+import { API_BASE } from "@/lib/api";
 
 interface SearchResult {
   id: number;
@@ -38,7 +39,7 @@ export default function GlobalSearchModal({ isOpen, onClose }: Props) {
     setLoading(true);
     const t = setTimeout(async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/meetings/search/global?q=${encodeURIComponent(query)}`);
+        const res = await fetch(`${API_BASE}/api/meetings/search/global?q=${encodeURIComponent(query)}`);
         const data = await res.json();
         setResults(data);
       } catch { setResults([]); }

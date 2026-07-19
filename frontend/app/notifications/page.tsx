@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { Bell, FolderCheck, ShieldAlert, CheckSquare, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Meeting } from "@/types";
+import { API_BASE } from "@/lib/api";
 
 interface NotificationItem {
   id: number;
@@ -66,7 +67,7 @@ export default function NotificationsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/meetings")
+    fetch("${API_BASE}/api/meetings")
       .then((r) => r.json())
       .then((meetings: Meeting[]) => {
         setNotifications(generateNotifications(meetings));
