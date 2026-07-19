@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --ff-green: #00C389;
+  --ff-green-hover: #00a876;
+  --ff-green-light: #e6faf5;
+  --ff-green-mid: #ccf5ea;
+  --ff-navy: #1a1f2e;
+  --ff-navy-2: #222736;
+  --ff-navy-3: #2a3042;
+  --ff-navy-border: #2d3348;
+  --ff-sidebar-text: #6b7280;
+  --ff-sidebar-hover: #f3f4f6;
+  --ff-sidebar-active-bg: rgba(0,195,137,0.10);
+  --ff-bg: #f5f6fa;
+  --ff-white: #ffffff;
+  --ff-border: #e8eaed;
+  --ff-text: #1a1f2e;
+  --ff-text-2: #4a5568;
+  --ff-text-3: #8b92a5;
+  --ff-shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --ff-shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --ff-shadow-lg: 0 8px 30px rgba(0,0,0,0.10);
+  --ff-radius-sm: 8px;
+  --ff-radius-md: 12px;
+  --ff-radius-lg: 16px;
+  --ff-transition: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'DM Sans', 'Inter', sans-serif;
+}
+
+body {
+  background: var(--ff-bg);
+  color: var(--ff-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* Scrollbar — hidden everywhere */
+::-webkit-scrollbar { width: 0; height: 0; }
+* { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* Inputs */
+input[type="range"] { accent-color: var(--ff-green); }
+input[type="checkbox"] { accent-color: var(--ff-green); }
+input[type="radio"] { accent-color: var(--ff-green); }
+
+/* Focus ring */
+*:focus-visible { outline: 2px solid var(--ff-green); outline-offset: 2px; border-radius: 4px; }
+
+/* Global smooth transitions for interactive elements */
+button, a, input, select, textarea {
+  transition: all var(--ff-transition);
+}
+
+/* Selection color */
+::selection {
+  background: var(--ff-green-light);
+  color: var(--ff-text);
+}
+
+/* Animations */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-slide-in { animation: slideInRight 0.25s ease-out; }
+.animate-fade-in  { animation: fadeIn 0.2s ease-out; }
+.animate-fade-in-up { animation: fadeInUp 0.25s ease-out; }
+.animate-scale-in { animation: scaleIn 0.2s ease-out; }
+.animate-spin { animation: spin 1s linear infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, var(--ff-bg) 25%, #e8eaed 50%, var(--ff-bg) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
