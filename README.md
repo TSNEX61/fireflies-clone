@@ -414,13 +414,15 @@ Dark navy background (#141821) with:
 
 ## Assumptions
 
-1. **No authentication** — Hardcoded user ID=1 for simplicity. In production, this would be replaced with OAuth/JWT.
-2. **Local development only** — Backend runs on localhost:8000, frontend on localhost:3000.
-3. **Mock AI** — Summaries are template-based, not real LLM. AskFred uses keyword matching against transcript data.
-4. **SQLite** — File-based database suitable for demo. Production would use PostgreSQL.
-5. **No file storage** — Audio/video URLs are not implemented. The media_url field exists but no upload server.
-6. **Settings persistence** — Frontend settings persist to localStorage, not the backend.
-7. **Notifications** — Generated dynamically from meeting data, not stored in the database.
+1. **No authentication** — Hardcoded user "Alex Sterling" (ID=1) for simplicity. In production, this would be replaced with OAuth/JWT.
+2. **Mock AI** — Summaries are template-based, not real LLM-generated. AskFred uses keyword matching against transcript data.
+3. **SQLite** — File-based database suitable for demo. Production would use PostgreSQL.
+4. **No real audio/video** — The media player is a UI placeholder. The `media_url` field exists in the schema but no file upload/storage is implemented.
+5. **Settings persistence** — Frontend settings (dark mode, profile) persist to `localStorage`, not the backend.
+6. **Notifications** — Generated dynamically from meeting data, not stored in the database.
+7. **Transcription mocked** — All transcript data is seeded from realistic mock content. No actual speech-to-text processing.
+8. **Single user** — No team/collaboration features. All data belongs to one default user.
+9. **Deployment** — Frontend on Vercel, backend on Render (free tier). Render free tier spins down after inactivity — first request may take ~30s.
 
 ---
 
