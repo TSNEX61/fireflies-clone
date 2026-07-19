@@ -109,13 +109,13 @@ export default function NotificationsPage() {
   };
 
   return (
-    <div style={{ display: "flex", background: "var(--ff-bg)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ display: "flex", background: "linear-gradient(160deg, #e8ecf4 0%, #dde1ea 30%, #e4e8f2 70%, #eaeef6 100%)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
       <Sidebar />
       <div style={{ flex: 1, marginLeft: "0", paddingTop: "56px" }}>
         <Navbar />
-        <main style={{ padding: "32px", maxWidth: "740px", margin: "0 auto" }}>
+        <main style={{ padding: "48px 56px", maxWidth: "820px", margin: "0 auto" }}>
           {/* Header */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "24px", borderRadius: "14px", marginBottom: "20px", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "28px", borderRadius: "18px", marginBottom: "20px", boxShadow: "var(--ff-shadow-card)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <div style={{ position: "relative", width: "44px", height: "44px", borderRadius: "12px", background: "var(--ff-green-light)", color: "var(--ff-green)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <Bell style={{ width: "22px", height: "22px" }} />
@@ -126,7 +126,7 @@ export default function NotificationsPage() {
                 )}
               </div>
               <div>
-                <h1 style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.01em", margin: 0 }}>Notifications</h1>
+                <h1 style={{ fontSize: "28px", fontWeight: 900, letterSpacing: "-0.03em", margin: 0 }}>Notifications</h1>
                 <p style={{ fontSize: "13px", color: "var(--ff-text-3)", margin: 0 }}>
                   {unreadCount > 0 ? `${unreadCount} unread notification${unreadCount > 1 ? "s" : ""}` : "You're all caught up!"}
                 </p>
@@ -145,7 +145,7 @@ export default function NotificationsPage() {
           </div>
 
           {/* Notification List */}
-          <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "14px", overflow: "hidden", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+          <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "18px", overflow: "hidden", boxShadow: "var(--ff-shadow-card)" }}>
             {loading ? (
               <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "8px" }}>
                 {[1, 2, 3].map((i) => (
@@ -162,18 +162,18 @@ export default function NotificationsPage() {
               notifications.map((item, idx) => {
                 const content = (
                   <div key={item.id} style={{
-                    padding: "16px 20px", display: "flex", gap: "14px",
+                    padding: "18px 24px", display: "flex", gap: "14px",
                     background: !item.isRead ? "rgba(0,195,137,0.03)" : "var(--ff-white)",
                     borderBottom: idx < notifications.length - 1 ? "1px solid var(--ff-border)" : "none",
                     textDecoration: "none", color: "inherit", cursor: item.meetingId ? "pointer" : "default",
-                    transition: "background 0.15s",
-                  }} onMouseEnter={e => e.currentTarget.style.background = !item.isRead ? "rgba(0,195,137,0.06)" : "var(--ff-bg)"} onMouseLeave={e => e.currentTarget.style.background = !item.isRead ? "rgba(0,195,137,0.03)" : "var(--ff-white)"}>
+                    transition: "background 0.15s, transform 0.15s",
+                  }} onMouseEnter={e => { e.currentTarget.style.transform = "translateX(2px)"; e.currentTarget.style.background = !item.isRead ? "rgba(0,195,137,0.06)" : "var(--ff-bg)"; }} onMouseLeave={e => { e.currentTarget.style.transform = "translateX(0)"; e.currentTarget.style.background = !item.isRead ? "rgba(0,195,137,0.03)" : "var(--ff-white)"; }}>
                     <div style={{ padding: "10px", background: getIconBg(item.category), borderRadius: "10px", height: "40px", width: "40px", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {getIcon(item.category)}
                     </div>
                     <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "3px" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                        <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "6px" }}>
+                        <span style={{ fontSize: "14px", fontWeight: 600, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "6px" }}>
                           {item.title}
                           {!item.isRead && <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--ff-green)", display: "inline-block" }} />}
                         </span>
@@ -182,7 +182,7 @@ export default function NotificationsPage() {
                           {item.meetingId && <ExternalLink style={{ width: "12px", height: "12px", color: "var(--ff-green)" }} />}
                         </div>
                       </div>
-                      <p style={{ fontSize: "12px", color: "var(--ff-text-3)", lineHeight: 1.6, fontWeight: 500, margin: 0 }}>
+                      <p style={{ fontSize: "13px", color: "var(--ff-text-3)", lineHeight: 1.6, fontWeight: 500, margin: 0 }}>
                         {item.body}
                       </p>
                     </div>

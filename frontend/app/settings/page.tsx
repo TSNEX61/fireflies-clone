@@ -62,27 +62,27 @@ function SettingsContent() {
   if (!loaded) return null;
 
   return (
-    <div style={{ display: "flex", background: "var(--ff-bg)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ display: "flex", background: "linear-gradient(160deg, #e8ecf4 0%, #dde1ea 30%, #e4e8f2 70%, #eaeef6 100%)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
       <Sidebar />
       <div style={{ flex: 1, marginLeft: "0", paddingTop: "56px" }}>
         <Navbar />
-        <main style={{ padding: "32px", maxWidth: "740px", margin: "0 auto" }}>
+        <main style={{ padding: "48px 56px", maxWidth: "820px", margin: "0 auto" }}>
           {/* Header */}
-          <div style={{ display: "flex", alignItems: "center", gap: "16px", background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "24px", borderRadius: "14px", marginBottom: "20px", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px", background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "28px", borderRadius: "18px", marginBottom: "20px", boxShadow: "var(--ff-shadow-card)" }}>
             <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "var(--ff-green-light)", color: "var(--ff-green)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
               <Settings style={{ width: "22px", height: "22px" }} />
             </div>
             <div>
-              <h1 style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.01em", margin: 0 }}>Settings</h1>
+              <h1 style={{ fontSize: "28px", fontWeight: 900, letterSpacing: "-0.03em", margin: 0 }}>Settings</h1>
               <p style={{ fontSize: "13px", color: "var(--ff-text-3)", margin: 0 }}>Manage your workspace options and preferences.</p>
             </div>
           </div>
 
-          <form onSubmit={handleSave} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "14px", boxShadow: "0 1px 3px rgba(0,0,0,0.04)", overflow: "hidden" }}>
+          <form onSubmit={handleSave} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "18px", boxShadow: "var(--ff-shadow-card)", overflow: "hidden" }}>
 
             {/* Section 1: Profile */}
             <div style={{ padding: "24px", borderBottom: "1px solid var(--ff-border)" }}>
-              <h3 style={{ fontSize: "14px", fontWeight: 700, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+              <h3 style={{ fontSize: "15px", fontWeight: 900, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
                 <User style={{ width: "16px", height: "16px", color: "var(--ff-green)" }} />
                 Profile
               </h3>
@@ -102,11 +102,11 @@ function SettingsContent() {
 
             {/* Section 2: Meeting Bot Settings */}
             <div style={{ padding: "24px", borderBottom: "1px solid var(--ff-border)" }}>
-              <h3 style={{ fontSize: "14px", fontWeight: 700, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+              <h3 style={{ fontSize: "15px", fontWeight: 900, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
                 <Sliders style={{ width: "16px", height: "16px", color: "var(--ff-green)" }} />
                 Meeting Join Settings
               </h3>
-              <p style={{ fontSize: "12px", fontWeight: 500, color: "var(--ff-text-3)", marginBottom: "16px" }}>
+              <p style={{ fontSize: "13px", fontWeight: 500, color: "var(--ff-text-3)", marginBottom: "16px" }}>
                 Specify which meetings the Fireflies bot should automatically dial into.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -131,11 +131,11 @@ function SettingsContent() {
 
             {/* Section 3: Language */}
             <div style={{ padding: "24px", borderBottom: "1px solid var(--ff-border)" }}>
-              <h3 style={{ fontSize: "14px", fontWeight: 700, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+              <h3 style={{ fontSize: "15px", fontWeight: 900, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
                 <Globe style={{ width: "16px", height: "16px", color: "var(--ff-green)" }} />
                 Transcription Language
               </h3>
-              <p style={{ fontSize: "12px", fontWeight: 500, color: "var(--ff-text-3)", marginBottom: "16px" }}>
+              <p style={{ fontSize: "13px", fontWeight: 500, color: "var(--ff-text-3)", marginBottom: "16px" }}>
                 Choose the primary language for speech parsing and summarization.
               </p>
               <select value={settings.transcriptionLanguage} onChange={e => update({ transcriptionLanguage: e.target.value })}
@@ -151,11 +151,11 @@ function SettingsContent() {
 
             {/* Section 4: Email Recaps */}
             <div style={{ padding: "24px", borderBottom: "1px solid var(--ff-border)" }}>
-              <h3 style={{ fontSize: "14px", fontWeight: 700, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+              <h3 style={{ fontSize: "15px", fontWeight: 900, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
                 <Mail style={{ width: "16px", height: "16px", color: "var(--ff-green)" }} />
                 Email Recaps
               </h3>
-              <p style={{ fontSize: "12px", fontWeight: 500, color: "var(--ff-text-3)", marginBottom: "16px" }}>
+              <p style={{ fontSize: "13px", fontWeight: 500, color: "var(--ff-text-3)", marginBottom: "16px" }}>
                 Select who should receive the meeting summary via email.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -175,7 +175,7 @@ function SettingsContent() {
 
             {/* Section 5: Security / Ask Fred */}
             <div style={{ padding: "24px", borderBottom: "1px solid var(--ff-border)" }}>
-              <h3 style={{ fontSize: "14px", fontWeight: 700, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+              <h3 style={{ fontSize: "15px", fontWeight: 900, color: "var(--ff-text)", display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
                 <Shield style={{ width: "16px", height: "16px", color: "var(--ff-green)" }} />
                 Security
               </h3>
@@ -194,7 +194,7 @@ function SettingsContent() {
             {/* Footer */}
             <div style={{ padding: "20px 24px", background: "var(--ff-bg)", display: "flex", justifyContent: "flex-end" }}>
               <button type="submit"
-                style={{ padding: "10px 20px", background: "var(--ff-green)", color: "#fff", border: "none", borderRadius: "10px", fontSize: "13px", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", transition: "background 0.15s" }}
+                style={{ padding: "12px 24px", background: "var(--ff-green)", color: "#fff", border: "none", borderRadius: "14px", fontSize: "14px", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", transition: "background 0.15s", boxShadow: "0 4px 14px rgba(0,195,137,0.25)" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-green-hover)"; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-green)"; }}>
                 <Save style={{ width: "14px", height: "14px" }} />

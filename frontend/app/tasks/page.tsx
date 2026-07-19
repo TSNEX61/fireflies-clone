@@ -105,26 +105,26 @@ function TasksContent() {
   ];
 
   return (
-    <div style={{ display: "flex", background: "var(--ff-bg)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ display: "flex", background: "linear-gradient(160deg, #e8ecf4 0%, #dde1ea 30%, #e4e8f2 70%, #eaeef6 100%)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
       <Sidebar />
       <div style={{ flex: 1, marginLeft: "0", paddingTop: "56px" }}>
         <Navbar />
-        <main style={{ padding: "32px", maxWidth: "860px", margin: "0 auto" }}>
+        <main style={{ padding: "48px 56px", maxWidth: "940px", margin: "0 auto" }}>
           {/* Header */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "14px", padding: "24px", marginBottom: "24px", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "18px", padding: "32px", marginBottom: "24px", boxShadow: "var(--ff-shadow-card)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "var(--ff-green-light)", color: "var(--ff-green)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <CheckSquare style={{ width: "22px", height: "22px" }} />
               </div>
               <div>
-                <h1 style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.01em", margin: 0 }}>Tasks</h1>
-                <p style={{ fontSize: "13px", color: "var(--ff-text-3)", margin: 0 }}>
+                <h1 style={{ fontSize: "28px", fontWeight: 900, letterSpacing: "-0.03em", margin: 0 }}>Tasks</h1>
+                <p style={{ fontSize: "14px", color: "var(--ff-text-3)", margin: 0 }}>
                   {tasks.filter(t => !t.is_complete).length} pending action item{tasks.filter(t => !t.is_complete).length !== 1 ? "s" : ""}
                 </p>
               </div>
             </div>
             <button onClick={() => setShowNewTask(!showNewTask)}
-              style={{ padding: "8px 16px", background: "var(--ff-green)", color: "#fff", border: "none", borderRadius: "8px", fontSize: "12px", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", boxShadow: "0 2px 8px rgba(0,195,137,0.2)", transition: "all 0.15s" }}
+              style={{ padding: "10px 20px", background: "var(--ff-green)", color: "#fff", border: "none", borderRadius: "12px", fontSize: "13px", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", boxShadow: "0 4px 14px rgba(0,195,137,0.25)", transition: "all 0.15s" }}
               onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-green-hover)"; }}
               onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-green)"; }}>
               {showNewTask ? <X style={{ width: "14px", height: "14px" }} /> : <Plus style={{ width: "14px", height: "14px" }} />}
@@ -134,7 +134,7 @@ function TasksContent() {
 
           {/* New task form */}
           {showNewTask && (
-            <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-green)", borderRadius: "14px", padding: "20px", marginBottom: "20px", animation: "fadeIn 0.2s ease-out", boxShadow: "0 0 0 3px rgba(0,195,137,0.08)" }}>
+            <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-green)", borderRadius: "16px", padding: "20px", marginBottom: "20px", animation: "fadeIn 0.2s ease-out", boxShadow: "0 0 0 3px rgba(0,195,137,0.08)" }}>
               <h3 style={{ fontSize: "13px", fontWeight: 700, color: "var(--ff-text)", margin: "0 0 12px" }}>Create New Task</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 <input value={newTaskText} onChange={e => setNewTaskText(e.target.value)} placeholder="Task description..."
@@ -159,7 +159,7 @@ function TasksContent() {
           )}
 
           {/* Filter Tabs */}
-          <div style={{ display: "flex", borderBottom: "1px solid var(--ff-border)", gap: "24px", marginBottom: "20px" }}>
+          <div style={{ display: "flex", borderBottom: "1px solid var(--ff-border)", gap: "32px", marginBottom: "36px" }}>
             {tabs.map((tab) => (
               <button key={tab.key} onClick={() => setFilter(tab.key)}
                 style={{ paddingBlock: "12px", fontSize: "13px", fontWeight: 700, border: "none", borderBottomWidth: "2px", borderBottomStyle: "solid", borderBottomColor: filter === tab.key ? "var(--ff-green)" : "transparent", color: filter === tab.key ? "var(--ff-green)" : "var(--ff-text-3)", background: "none", cursor: "pointer", transition: "all 0.15s" }}>
@@ -172,11 +172,11 @@ function TasksContent() {
           {loading ? (
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {[...Array(4)].map((_, i) => (
-                <div key={i} style={{ height: "64px", background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "12px", animation: "shimmer 1.5s infinite", backgroundSize: "200% 100%" }} />
+                <div key={i} style={{ height: "64px", background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "14px", animation: "shimmer 1.5s infinite", backgroundSize: "200% 100%" }} />
               ))}
             </div>
           ) : filteredTasks.length === 0 ? (
-            <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "14px", padding: "64px", textAlign: "center" }}>
+            <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "18px", padding: "100px", textAlign: "center" }}>
               <ClipboardList style={{ width: "48px", height: "48px", color: "var(--ff-border)", margin: "0 auto 12px" }} />
               <h3 style={{ fontSize: "15px", fontWeight: 700, color: "var(--ff-text)", marginBottom: "6px" }}>
                 {filter === "all" ? "No Action Items" : filter === "pending" ? "All caught up!" : "No completed tasks"}
@@ -189,19 +189,19 @@ function TasksContent() {
             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               {filteredTasks.map((task) => (
                 <div key={task.id}
-                  style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "16px", borderRadius: "12px", display: "flex", alignItems: "flex-start", gap: "14px", transition: "border-color 0.15s" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#d0d5dd"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "var(--ff-border)"; }}>
+                  style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "20px", borderRadius: "16px", display: "flex", alignItems: "flex-start", gap: "14px", transition: "all 0.15s", boxShadow: "var(--ff-shadow-card)" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#d0d5dd"; (e.currentTarget as HTMLElement).style.boxShadow = "var(--ff-shadow-card-hover)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "var(--ff-border)"; (e.currentTarget as HTMLElement).style.boxShadow = "var(--ff-shadow-card)"; (e.currentTarget as HTMLElement).style.transform = "none"; }}>
                   <input type="checkbox" checked={task.is_complete} onChange={() => handleToggleTask(task.id, task.is_complete)}
                     style={{ width: "16px", height: "16px", borderRadius: "4px", accentColor: "var(--ff-green)", cursor: "pointer", flexShrink: 0, marginTop: "2px" }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: "13px", fontWeight: 600, lineHeight: 1.5, margin: "0 0 4px", textDecoration: task.is_complete ? "line-through" : "none", color: task.is_complete ? "var(--ff-text-3)" : "var(--ff-text)" }}>
+                    <p style={{ fontSize: "14px", fontWeight: 600, lineHeight: 1.5, margin: "0 0 4px", textDecoration: task.is_complete ? "line-through" : "none", color: task.is_complete ? "var(--ff-text-3)" : "var(--ff-text)" }}>
                       {task.text}
                     </p>
-                    <p style={{ fontSize: "11px", color: "var(--ff-text-3)", margin: "0 0 8px", fontWeight: 500 }}>
+                    <p style={{ fontSize: "12px", color: "var(--ff-text-3)", margin: "0 0 8px", fontWeight: 500 }}>
                       From: {getMeetingTitle(task.meeting_id)}
                     </p>
-                    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "12px", fontSize: "11px", color: "var(--ff-text-3)", fontWeight: 600 }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "12px", fontSize: "12px", color: "var(--ff-text-3)", fontWeight: 600 }}>
                       {task.assignee && (
                         <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
                           <User style={{ width: "12px", height: "12px" }} />

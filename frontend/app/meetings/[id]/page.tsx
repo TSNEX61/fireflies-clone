@@ -358,7 +358,7 @@ function MeetingDetailContent() {
   ];
 
   const pillBtn = (active: boolean): React.CSSProperties => ({
-    width: "36px", height: "36px", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center",
+    width: "36px", height: "36px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
     cursor: "pointer", border: "none", flexShrink: 0,
     background: active ? "var(--ff-green-light)" : "transparent",
     color: active ? "var(--ff-green)" : "var(--ff-text-3)",
@@ -367,7 +367,7 @@ function MeetingDetailContent() {
 
   if (loading) {
     return (
-      <div style={{ display: "flex", background: "var(--ff-bg)", minHeight: "100vh" }}>
+      <div style={{ display: "flex", background: "linear-gradient(160deg, #e8ecf4 0%, #dde1ea 30%, #e4e8f2 70%, #eaeef6 100%)", minHeight: "100vh" }}>
         <Sidebar />
         <div style={{ flex: 1, marginLeft: "0", paddingTop: "56px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
@@ -381,7 +381,7 @@ function MeetingDetailContent() {
 
   if (error || !meeting) {
     return (
-      <div style={{ display: "flex", background: "var(--ff-bg)", minHeight: "100vh" }}>
+      <div style={{ display: "flex", background: "linear-gradient(160deg, #e8ecf4 0%, #dde1ea 30%, #e4e8f2 70%, #eaeef6 100%)", minHeight: "100vh" }}>
         <Sidebar />
         <div style={{ flex: 1, marginLeft: "0", paddingTop: "56px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ maxWidth: "420px", padding: "32px", background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "16px", textAlign: "center", animation: "scaleIn 0.2s ease-out" }}>
@@ -396,7 +396,7 @@ function MeetingDetailContent() {
   }
 
   return (
-    <div style={{ display: "flex", background: "var(--ff-bg)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ display: "flex", background: "linear-gradient(160deg, #e8ecf4 0%, #dde1ea 30%, #e4e8f2 70%, #eaeef6 100%)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
       <Sidebar />
 
       <div style={{ flex: 1, marginLeft: "0", paddingTop: "56px", display: "flex", flexDirection: "column", height: "100vh", overflow: "hidden" }}>
@@ -444,14 +444,14 @@ function MeetingDetailContent() {
           )}
 
           {/* LEFT PANEL: AI Summary + Notes OR AskFred */}
-          <div style={{ flex: "0 0 55%", maxWidth: "55%", display: "flex", flexDirection: "column", borderRight: "1px solid var(--ff-border)", height: "100%", background: "var(--ff-bg)" }}>
+          <div style={{ flex: "0 0 55%", maxWidth: "55%", display: "flex", flexDirection: "column", borderRight: "1px solid var(--ff-border)", height: "100%", background: "#f3f4f8" }}>
             {leftPanel === "notes" && (
               <div style={{ flex: 1, overflowY: "auto", padding: "24px" }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                   {meeting.summary && (
                     <>
-                      <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "20px", borderRadius: "12px", animation: "fadeInUp 0.3s ease-out" }}>
-                        <h4 style={{ fontSize: "11px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>Keywords</h4>
+                      <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "24px", borderRadius: "16px", boxShadow: "var(--ff-shadow-card)", animation: "fadeInUp 0.3s ease-out" }}>
+                        <h4 style={{ fontSize: "12px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>Keywords</h4>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
                           {meeting.summary.keywords.map((kw, i) => (
                             <span key={i} style={{ fontSize: "11px", fontWeight: 600, padding: "4px 10px", borderRadius: "20px", background: "var(--ff-green-light)", color: "var(--ff-green)" }}>{kw}</span>
@@ -459,19 +459,19 @@ function MeetingDetailContent() {
                         </div>
                       </div>
 
-                      <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "20px", borderRadius: "12px", animation: "fadeInUp 0.3s ease-out 0.05s both" }}>
-                        <h4 style={{ fontSize: "11px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>Overview</h4>
+                      <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "24px", borderRadius: "16px", boxShadow: "var(--ff-shadow-card)", animation: "fadeInUp 0.3s ease-out 0.05s both" }}>
+                        <h4 style={{ fontSize: "12px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>Overview</h4>
                         <p style={{ fontSize: "13px", color: "var(--ff-text-2)", lineHeight: 1.7, fontWeight: 500, margin: 0 }}>{meeting.summary.overview_text}</p>
                       </div>
                     </>
                   )}
 
                   {meeting.topics.length > 0 && (
-                    <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "20px", borderRadius: "12px", animation: "fadeInUp 0.3s ease-out 0.1s both" }}>
-                      <h4 style={{ fontSize: "11px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>Topics</h4>
+                    <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "24px", borderRadius: "16px", boxShadow: "var(--ff-shadow-card)", animation: "fadeInUp 0.3s ease-out 0.1s both" }}>
+                      <h4 style={{ fontSize: "12px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>Topics</h4>
                       <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                         {meeting.topics.map((topic) => (
-                          <button key={topic.id} onClick={() => seekTo(topic.start_time_seconds || 0)} style={{ width: "100%", textAlign: "left", padding: "10px 12px", borderRadius: "8px", border: "1px solid var(--ff-border)", background: "var(--ff-white)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", transition: "all 0.2s" }} onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-green-light)"; e.currentTarget.style.borderColor = "#b2e8d8"; }} onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-white)"; e.currentTarget.style.borderColor = "var(--ff-border)"; }}>
+                          <button key={topic.id} onClick={() => seekTo(topic.start_time_seconds || 0)} style={{ width: "100%", textAlign: "left", padding: "12px 14px", borderRadius: "10px", border: "1px solid var(--ff-border)", background: "var(--ff-white)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", transition: "all 0.2s" }} onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-green-light)"; e.currentTarget.style.borderColor = "#b2e8d8"; }} onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-white)"; e.currentTarget.style.borderColor = "var(--ff-border)"; }}>
                             <span style={{ fontSize: "12px", fontWeight: 600, color: "var(--ff-text)" }}>{topic.title}</span>
                             <span style={{ fontSize: "10px", fontWeight: 700, color: "var(--ff-green)", background: "var(--ff-green-light)", padding: "2px 8px", borderRadius: "6px" }}>{formatTime(topic.start_time_seconds || 0)}</span>
                           </button>
@@ -480,9 +480,9 @@ function MeetingDetailContent() {
                     </div>
                   )}
 
-                  <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "20px", borderRadius: "12px", animation: "fadeInUp 0.3s ease-out 0.15s both" }}>
+                  <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", padding: "24px", borderRadius: "16px", boxShadow: "var(--ff-shadow-card)", animation: "fadeInUp 0.3s ease-out 0.15s both" }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "14px" }}>
-                      <h4 style={{ fontSize: "11px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.08em", display: "flex", alignItems: "center", gap: "6px", margin: 0 }}>
+                      <h4 style={{ fontSize: "12px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.1em", display: "flex", alignItems: "center", gap: "6px", margin: 0 }}>
                         <CheckSquare style={{ width: "14px", height: "14px", color: "var(--ff-green)" }} />
                         Action Items
                       </h4>
@@ -504,7 +504,7 @@ function MeetingDetailContent() {
                             ) : (
                               <div>
                                 <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
-                                  <span style={{ fontSize: "12px", fontWeight: 600, lineHeight: 1.4, textDecoration: ai.is_complete ? "line-through" : "none", color: ai.is_complete ? "var(--ff-text-3)" : "var(--ff-text)" }}>{ai.text}</span>
+                                  <span style={{ fontSize: "13px", fontWeight: 600, lineHeight: 1.4, textDecoration: ai.is_complete ? "line-through" : "none", color: ai.is_complete ? "var(--ff-text-3)" : "var(--ff-text)" }}>{ai.text}</span>
                                   <div style={{ display: "flex", gap: "4px", opacity: 0, flexShrink: 0 }} className="group-hover:!opacity-100">
                                     <button onClick={() => { setEditingAiId(ai.id); setEditingAiText(ai.text); }} style={{ padding: "2px", background: "none", border: "none", cursor: "pointer", color: "var(--ff-text-3)" }} title="Edit"><Edit2 style={{ width: "11px", height: "11px" }} /></button>
                                     <button onClick={() => handleDeleteActionItem(ai.id)} style={{ padding: "2px", background: "none", border: "none", cursor: "pointer", color: "var(--ff-text-3)" }} title="Delete"><Trash2 style={{ width: "11px", height: "11px" }} /></button>
@@ -531,7 +531,7 @@ function MeetingDetailContent() {
                       {meeting.action_items.length === 0 && <div style={{ textAlign: "center", padding: "20px", fontSize: "12px", color: "var(--ff-text-3)" }}>No action items.</div>}
                       <div style={{ borderTop: "1px solid var(--ff-border)", paddingTop: "10px", marginTop: "4px" }}>
                         <div style={{ display: "flex", gap: "6px" }}>
-                          <input type="text" placeholder="Add action item..." value={newAiText} onChange={(e) => setNewAiText(e.target.value)} style={{ flex: 1, padding: "8px 10px", border: "1px solid var(--ff-border)", borderRadius: "8px", fontSize: "12px", outline: "none", background: "var(--ff-bg)", color: "var(--ff-text)", transition: "all 0.15s" }} onKeyDown={(e) => { if (e.key === "Enter") handleAddActionItem(); }} onFocus={e => { e.currentTarget.style.borderColor = "var(--ff-green)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,195,137,0.08)"; }} onBlur={e => { e.currentTarget.style.borderColor = "var(--ff-border)"; e.currentTarget.style.boxShadow = "none"; }} />
+                          <input type="text" placeholder="Add action item..." value={newAiText} onChange={(e) => setNewAiText(e.target.value)} style={{ flex: 1, padding: "8px 10px", border: "1px solid var(--ff-border)", borderRadius: "10px", fontSize: "12px", outline: "none", background: "var(--ff-bg)", color: "var(--ff-text)", transition: "all 0.15s" }} onKeyDown={(e) => { if (e.key === "Enter") handleAddActionItem(); }} onFocus={e => { e.currentTarget.style.borderColor = "var(--ff-green)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,195,137,0.08)"; }} onBlur={e => { e.currentTarget.style.borderColor = "var(--ff-border)"; e.currentTarget.style.boxShadow = "none"; }} />
                           <select value={newAiAssigneeId} onChange={(e) => setNewAiAssigneeId(Number(e.target.value))} style={{ padding: "6px 8px", border: "1px solid var(--ff-border)", borderRadius: "8px", fontSize: "11px", outline: "none", background: "var(--ff-white)", color: "var(--ff-text)", fontWeight: 600 }}>
                             <option value={0}>Unassigned</option>
                             {meeting.participants.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
@@ -547,9 +547,9 @@ function MeetingDetailContent() {
             {leftPanel === "askfred" && (
               /* AskFred Panel */
               <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
-                <div style={{ padding: "14px 16px", borderBottom: "1px solid var(--ff-border)", background: "var(--ff-white)", display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+                <div style={{ padding: "14px 16px", borderBottom: "1px solid var(--ff-border)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)", background: "var(--ff-white)", display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
                   <div style={{ width: "24px", height: "24px", borderRadius: "6px", background: "var(--ff-green-light)", color: "var(--ff-green)", display: "flex", alignItems: "center", justifyContent: "center" }}><Bot style={{ width: "14px", height: "14px" }} /></div>
-                  <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--ff-text)", fontFamily: "'DM Sans', sans-serif" }}>AskFred</span>
+                  <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--ff-text)", fontFamily: "'DM Sans', sans-serif" }}>AskFred</span>
                   <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "4px", fontSize: "10px", fontWeight: 700, color: "var(--ff-text-3)", background: "var(--ff-bg)", padding: "3px 8px", borderRadius: "6px", border: "1px solid var(--ff-border)" }}>
                     <span>GPT-4o</span><ChevronDown style={{ width: "12px", height: "12px" }} />
                   </div>
@@ -609,7 +609,7 @@ function MeetingDetailContent() {
                     </div>
                   )}
                   {bookmarks.map((b) => (
-                    <div key={b.id} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "10px", padding: "12px", animation: "fadeIn 0.2s ease-out" }}>
+                    <div key={b.id} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "12px", boxShadow: "var(--ff-shadow-sm)", padding: "12px", animation: "fadeIn 0.2s ease-out" }}>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
                         <button onClick={() => seekTo(b.timestamp_seconds)} style={{ display: "flex", alignItems: "center", gap: "4px", padding: "2px 8px", borderRadius: "6px", border: "none", background: "var(--ff-green-light)", color: "var(--ff-green)", fontSize: "10px", fontWeight: 700, cursor: "pointer" }}>
                           <Play style={{ width: "9px", height: "9px", fill: "var(--ff-green)" }} />{formatTime(b.timestamp_seconds)}
@@ -648,7 +648,7 @@ function MeetingDetailContent() {
                     </div>
                   )}
                   {comments.map((c) => (
-                    <div key={c.id} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "10px", padding: "12px", animation: "fadeIn 0.2s ease-out" }}>
+                    <div key={c.id} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "12px", boxShadow: "var(--ff-shadow-sm)", padding: "12px", animation: "fadeIn 0.2s ease-out" }}>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                           <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "var(--ff-green-light)", color: "var(--ff-green)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "8px", fontWeight: 700 }}>{c.author_name[0]}</div>
@@ -693,7 +693,7 @@ function MeetingDetailContent() {
                     </div>
                   )}
                   {soundbites.map((sb) => (
-                    <div key={sb.id} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "10px", padding: "12px", animation: "fadeIn 0.2s ease-out" }}>
+                    <div key={sb.id} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "12px", boxShadow: "var(--ff-shadow-sm)", padding: "12px", animation: "fadeIn 0.2s ease-out" }}>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
                         <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--ff-text)" }}>{sb.title}</span>
                         <button onClick={() => handleDeleteSoundbite(sb.id)} style={{ padding: "2px", background: "none", border: "none", cursor: "pointer", color: "var(--ff-text-3)", opacity: 0.6 }} title="Delete"><Trash2 style={{ width: "12px", height: "12px" }} /></button>
@@ -731,14 +731,14 @@ function MeetingDetailContent() {
           </div>
 
           {/* RIGHT PANEL: Transcript + Audio Player at bottom */}
-          <div style={{ flex: "0 0 45%", maxWidth: "45%", display: "flex", flexDirection: "column", height: "100%", background: "var(--ff-white)" }}>
+              <div style={{ flex: "0 0 45%", maxWidth: "45%", display: "flex", flexDirection: "column", height: "100%", background: "#fafbfc" }}>
 
             {/* Transcript Header + Search */}
-            <div style={{ padding: "10px 20px", borderBottom: "1px solid var(--ff-border)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--ff-white)", flexShrink: 0 }}>
+            <div style={{ padding: "14px 24px", borderBottom: "1px solid var(--ff-border)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--ff-white)", flexShrink: 0 }}>
               <span style={{ fontSize: "11px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Transcript</span>
               <div style={{ position: "relative", width: "180px" }}>
                 <Search style={{ width: "12px", height: "12px", color: "var(--ff-text-3)", position: "absolute", left: "8px", top: "50%", transform: "translateY(-50%)" }} />
-                <input type="text" placeholder="Search transcript..." value={transcriptQuery} onChange={(e) => setTranscriptQuery(e.target.value)} style={{ width: "100%", paddingLeft: "26px", paddingRight: transcriptQuery ? "52px" : "8px", paddingBlock: "5px", border: "1px solid var(--ff-border)", borderRadius: "6px", fontSize: "11px", background: "var(--ff-bg)", color: "var(--ff-text)", outline: "none", transition: "all 0.15s" }} onFocus={e => { e.currentTarget.style.borderColor = "var(--ff-green)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,195,137,0.06)"; }} onBlur={e => { e.currentTarget.style.borderColor = "var(--ff-border)"; e.currentTarget.style.boxShadow = "none"; }} />
+                <input type="text" placeholder="Search transcript..." value={transcriptQuery} onChange={(e) => setTranscriptQuery(e.target.value)} style={{ width: "100%", paddingLeft: "26px", paddingRight: transcriptQuery ? "52px" : "8px", paddingBlock: "5px", border: "1px solid var(--ff-border)", borderRadius: "8px", fontSize: "11px", background: "var(--ff-bg)", color: "var(--ff-text)", outline: "none", transition: "all 0.15s" }} onFocus={e => { e.currentTarget.style.borderColor = "var(--ff-green)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,195,137,0.06)"; }} onBlur={e => { e.currentTarget.style.borderColor = "var(--ff-border)"; e.currentTarget.style.boxShadow = "none"; }} />
                 {transcriptQuery && (
                   <div style={{ position: "absolute", right: "6px", top: "50%", transform: "translateY(-50%)", display: "flex", alignItems: "center", gap: "3px", fontSize: "9px", fontWeight: 700, color: "var(--ff-text-3)" }}>
                     <span>{searchMatches.length > 0 ? activeMatchIndex + 1 : 0}/{searchMatches.length}</span>
@@ -762,14 +762,14 @@ function MeetingDetailContent() {
                 else if (isMatch) { bg = "#fefce8"; borderL = "transparent"; }
 
                 return (
-                  <div key={seg.id} id={`segment-${seg.id}`} onClick={() => seekTo(seg.start_time_seconds)} style={{ padding: "10px 12px", borderRadius: "8px", background: bg, borderLeft: `3px solid ${borderL}`, cursor: "pointer", display: "flex", gap: "12px", transition: "all 0.15s" }} onMouseEnter={e => { if (!isActive && !isCurrentMatch) e.currentTarget.style.background = "var(--ff-bg)"; }} onMouseLeave={e => { if (!isActive && !isCurrentMatch && !isMatch) e.currentTarget.style.background = bg; }}>
-                    <div style={{ width: "28px", height: "28px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "10px", textTransform: "uppercase", flexShrink: 0, background: c.bg, color: c.text }}>{seg.speaker.name[0]}</div>
+                  <div key={seg.id} id={`segment-${seg.id}`} onClick={() => seekTo(seg.start_time_seconds)} style={{ padding: "12px 14px", borderRadius: "12px", background: bg, borderLeft: `3px solid ${borderL}`, cursor: "pointer", display: "flex", gap: "12px", transition: "all 0.15s" }} onMouseEnter={e => { if (!isActive && !isCurrentMatch) e.currentTarget.style.background = "var(--ff-bg)"; }} onMouseLeave={e => { if (!isActive && !isCurrentMatch && !isMatch) e.currentTarget.style.background = bg; }}>
+                    <div style={{ width: "28px", height: "28px", borderRadius: "50%", boxShadow: "0 1px 3px rgba(0,0,0,0.06)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "10px", textTransform: "uppercase", flexShrink: 0, background: c.bg, color: c.text }}>{seg.speaker.name[0]}</div>
                     <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "2px" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                        <span style={{ fontSize: "11px", fontWeight: 700, color: "var(--ff-text)" }}>{seg.speaker.name}</span>
+                        <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--ff-text)" }}>{seg.speaker.name}</span>
                         <span style={{ fontSize: "10px", fontWeight: 700, color: "var(--ff-green)", cursor: "pointer" }} onClick={(e) => { e.stopPropagation(); seekTo(seg.start_time_seconds); }}>{formatTime(seg.start_time_seconds)}</span>
                       </div>
-                      <p style={{ fontSize: "12px", color: "var(--ff-text-2)", lineHeight: 1.6, fontWeight: 500, margin: 0 }}>{seg.text}</p>
+                      <p style={{ fontSize: "13px", color: "var(--ff-text-2)", lineHeight: 1.65, fontWeight: 500, margin: 0 }}>{seg.text}</p>
                     </div>
                   </div>
                 );
@@ -779,8 +779,8 @@ function MeetingDetailContent() {
 
             {/* Audio Player — fixed at bottom of transcript panel, like real Fireflies */}
             <div style={{ padding: "12px 20px", borderTop: "1px solid var(--ff-border)", background: "var(--ff-white)", flexShrink: 0 }}>
-              <div style={{ background: "var(--ff-navy)", borderRadius: "12px", padding: "14px 18px", display: "flex", alignItems: "center", gap: "14px" }}>
-                <button onClick={togglePlay} style={{ width: "36px", height: "36px", borderRadius: "50%", background: "var(--ff-green)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", border: "none", flexShrink: 0, transition: "all 0.15s" }} onMouseEnter={e => e.currentTarget.style.background = "var(--ff-green-hover)"} onMouseLeave={e => e.currentTarget.style.background = "var(--ff-green)"}>
+              <div style={{ background: "var(--ff-navy)", borderRadius: "16px", padding: "16px 20px", display: "flex", alignItems: "center", gap: "14px", boxShadow: "0 4px 20px rgba(26,31,46,0.3)" }}>
+                <button onClick={togglePlay} style={{ width: "44px", height: "44px", borderRadius: "50%", background: "var(--ff-green)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", border: "none", flexShrink: 0, transition: "all 0.15s", boxShadow: "0 4px 14px rgba(0,195,137,0.3)" }} onMouseEnter={e => e.currentTarget.style.background = "var(--ff-green-hover)"} onMouseLeave={e => e.currentTarget.style.background = "var(--ff-green)"}>
                   {isPlaying ? <Pause style={{ width: "16px", height: "16px", fill: "#fff" }} /> : <Play style={{ width: "16px", height: "16px", fill: "#fff", marginLeft: "2px" }} />}
                 </button>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "4px" }}>
@@ -805,13 +805,13 @@ function MeetingDetailContent() {
 
       {/* Delete Confirmation */}
       {isDeleteConfirmOpen && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", background: "rgba(26,31,46,0.6)", backdropFilter: "blur(4px)", animation: "fadeIn 0.15s ease-out" }}>
-          <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "16px", width: "100%", maxWidth: "400px", padding: "24px", boxShadow: "0 20px 60px rgba(0,0,0,0.15)", animation: "scaleIn 0.2s ease-out" }}>
-            <h3 style={{ fontSize: "16px", fontWeight: 700, color: "var(--ff-text)", marginBottom: "8px", fontFamily: "'DM Sans', sans-serif" }}>Delete Meeting?</h3>
+        <div style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", background: "rgba(26,31,46,0.65)", backdropFilter: "blur(8px)", animation: "fadeIn 0.15s ease-out" }}>
+          <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "16px", width: "100%", maxWidth: "400px", padding: "24px", boxShadow: "0 24px 80px rgba(0,0,0,0.2)", animation: "scaleIn 0.2s ease-out" }}>
+            <h3 style={{ fontSize: "18px", fontWeight: 800, color: "var(--ff-text)", marginBottom: "8px", fontFamily: "'DM Sans', sans-serif" }}>Delete Meeting?</h3>
             <p style={{ fontSize: "13px", fontWeight: 500, color: "var(--ff-text-3)", lineHeight: 1.6, marginBottom: "20px" }}>This will permanently erase the transcript, summaries, and tasks. This action is irreversible.</p>
             <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
               <button onClick={() => setIsDeleteConfirmOpen(false)} style={{ padding: "8px 16px", border: "1px solid var(--ff-border)", borderRadius: "8px", background: "var(--ff-white)", color: "var(--ff-text-2)", fontSize: "12px", fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }} onMouseEnter={e => e.currentTarget.style.background = "var(--ff-bg)"} onMouseLeave={e => e.currentTarget.style.background = "var(--ff-white)"}>Cancel</button>
-              <button onClick={handleDeleteMeeting} style={{ padding: "8px 16px", border: "none", borderRadius: "8px", background: "#ef4444", color: "#fff", fontSize: "12px", fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }} onMouseEnter={e => e.currentTarget.style.background = "#dc2626"} onMouseLeave={e => e.currentTarget.style.background = "#ef4444"}>Delete</button>
+              <button onClick={handleDeleteMeeting} style={{ padding: "8px 16px", border: "none", borderRadius: "10px", background: "#ef4444", color: "#fff", fontSize: "12px", fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }} onMouseEnter={e => e.currentTarget.style.background = "#dc2626"} onMouseLeave={e => e.currentTarget.style.background = "#ef4444"}>Delete</button>
             </div>
           </div>
         </div>

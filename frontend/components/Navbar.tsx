@@ -44,8 +44,11 @@ export default function Navbar({ meeting, shareCopied, onShare, menuOpen, onMenu
       className="h-14 flex items-center fixed top-0 right-0 z-20"
       style={{
         left: "0",
-        background: "var(--ff-white)",
-        borderBottom: "1px solid var(--ff-border)",
+        background: "rgba(255,255,255,0.85)",
+        borderBottom: "1px solid rgba(226,229,235,0.6)",
+        boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
         paddingLeft: "42px",
         paddingRight: "24px",
       }}
@@ -102,7 +105,7 @@ export default function Navbar({ meeting, shareCopied, onShare, menuOpen, onMenu
                 color: shareCopied ? "var(--ff-green)" : "var(--ff-text-2)",
                 transition: "all 0.15s",
               }}
-              onMouseEnter={e => { if (!shareCopied) e.currentTarget.style.background = "var(--ff-bg)"; }}
+              onMouseEnter={e => { if (!shareCopied) e.currentTarget.style.background = "rgba(0,195,137,0.06)"; }}
               onMouseLeave={e => { if (!shareCopied) e.currentTarget.style.background = shareCopied ? "var(--ff-green-light)" : "var(--ff-white)"; }}
             >
               {shareCopied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
@@ -150,7 +153,7 @@ export default function Navbar({ meeting, shareCopied, onShare, menuOpen, onMenu
           onClick={() => router.push("/notifications")}
         >
           <Bell className="w-[18px] h-[18px]" />
-          <span className="absolute top-[5px] right-[5px] w-[7px] h-[7px] rounded-full border-[1.5px] border-white" style={{ background: "var(--ff-green)" }} />
+          <span className="absolute top-[5px] right-[5px] w-[8px] h-[8px] rounded-full border-[1.5px] border-white" style={{ background: "var(--ff-green)", boxShadow: "0 0 6px rgba(0,195,137,0.4)" }} />
         </button>
 
         <div className="w-px h-5 mx-0.5" style={{ background: "var(--ff-border)" }} />
@@ -158,7 +161,7 @@ export default function Navbar({ meeting, shareCopied, onShare, menuOpen, onMenu
         <button
           className="flex items-center gap-2 px-2 py-1.5 rounded-lg"
           style={{ transition: "all 0.15s" }}
-          onMouseEnter={e => (e.currentTarget.style.background = "var(--ff-bg)")}
+          onMouseEnter={e => (e.currentTarget.style.background = "rgba(0,195,137,0.04)")}
           onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
         >
           <img
@@ -166,7 +169,7 @@ export default function Navbar({ meeting, shareCopied, onShare, menuOpen, onMenu
             alt="Profile"
             className="w-7 h-7 rounded-full flex-shrink-0"
           />
-          <span className="text-[12px] font-semibold" style={{ color: "var(--ff-text)" }}>Alex Sterling</span>
+          <span className="text-[13px] font-semibold" style={{ color: "var(--ff-text)" }}>Alex Sterling</span>
         </button>
       </div>
     </header>

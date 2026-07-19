@@ -56,47 +56,47 @@ function HomeContent() {
   const allParticipants = new Set(meetings.flatMap((m) => m.participants?.map((p) => p.name) || []));
 
   return (
-    <div style={{ display: "flex", background: "var(--ff-bg)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ display: "flex", background: "linear-gradient(160deg, #e8ecf4 0%, #dde1ea 30%, #e4e8f2 70%, #eaeef6 100%)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
       <Sidebar />
       <div style={{ flex: 1, marginLeft: 0, paddingTop: "56px", display: "flex", flexDirection: "column" }}>
-        <main style={{ flex: 1, padding: "28px 36px", maxWidth: "1100px", width: "100%", margin: "0 auto" }}>
+        <main style={{ flex: 1, padding: "48px 56px", maxWidth: "1140px", width: "100%", margin: "0 auto" }}>
 
           {/* Welcome */}
-          <div style={{ marginBottom: "28px" }}>
-            <h1 style={{ fontSize: "22px", fontWeight: 800, color: "var(--ff-text)", margin: "0 0 4px", fontFamily: "'DM Sans', sans-serif" }}>
+          <div style={{ marginBottom: "48px" }}>
+            <h1 style={{ fontSize: "36px", fontWeight: 900, letterSpacing: "-0.03em", color: "var(--ff-text)", margin: "0 0 4px", fontFamily: "'DM Sans', sans-serif" }}>
               Welcome back, Alex
             </h1>
-            <p style={{ fontSize: "13px", color: "var(--ff-text-3)", margin: 0, fontWeight: 500 }}>
+            <p style={{ fontSize: "15px", marginTop: "8px", color: "var(--ff-text-3)", margin: "6px 0 0", fontWeight: 500 }}>
               Here&apos;s an overview of your meetings and activity.
             </p>
           </div>
 
           {/* Stats Cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "14px", marginBottom: "28px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", marginBottom: "48px" }}>
             {[
               { label: "Total Meetings", value: totalMeetings, icon: Mic2, color: "#00C389", bg: "#e6faf5" },
               { label: "Total Hours", value: totalHours, icon: Clock, color: "#3b82f6", bg: "#eff6ff" },
               { label: "This Week", value: thisWeek.length, icon: Calendar, color: "#f59e0b", bg: "#fffbeb" },
               { label: "Participants", value: allParticipants.size, icon: Users, color: "#8b5cf6", bg: "#f5f3ff" },
             ].map((stat, i) => (
-              <div key={i} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "12px", padding: "18px 20px", display: "flex", alignItems: "center", gap: "14px", animation: `fadeInUp 0.3s ease-out ${i * 0.05}s both` }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: stat.bg, color: stat.color, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <div key={i} style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "16px", padding: "24px 28px", display: "flex", alignItems: "center", gap: "14px", animation: `fadeInUp 0.4s ease-out ${i * 0.05}s both`, boxShadow: "var(--ff-shadow-card)" }}>
+                <div style={{ width: "48px", height: "48px", borderRadius: "14px", background: stat.bg, color: stat.color, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <stat.icon style={{ width: "20px", height: "20px" }} />
                 </div>
                 <div>
-                  <p style={{ fontSize: "20px", fontWeight: 800, color: "var(--ff-text)", margin: 0, fontFamily: "'DM Sans', sans-serif", lineHeight: 1.1 }}>{stat.value}</p>
-                  <p style={{ fontSize: "11px", color: "var(--ff-text-3)", margin: 0, fontWeight: 600 }}>{stat.label}</p>
+                  <p style={{ fontSize: "32px", fontWeight: 900, color: "var(--ff-text)", margin: 0, fontFamily: "'DM Sans', sans-serif", lineHeight: 1.1 }}>{stat.value}</p>
+                  <p style={{ fontSize: "12px", color: "var(--ff-text-3)", margin: 0, fontWeight: 600 }}>{stat.label}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "20px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "32px" }}>
 
             {/* Recent Meetings */}
-            <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "14px", overflow: "hidden" }}>
-              <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--ff-border)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <h3 style={{ fontSize: "14px", fontWeight: 700, color: "var(--ff-text)", margin: 0, fontFamily: "'DM Sans', sans-serif" }}>Recent Meetings</h3>
+            <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "18px", overflow: "hidden", boxShadow: "var(--ff-shadow-card)" }}>
+              <div style={{ padding: "22px 26px", borderBottom: "1px solid var(--ff-border)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <h3 style={{ fontSize: "16px", fontWeight: 800, color: "var(--ff-text)", margin: 0, fontFamily: "'DM Sans', sans-serif" }}>Recent Meetings</h3>
                 <Link href="/" style={{ fontSize: "11px", fontWeight: 600, color: "var(--ff-green)", textDecoration: "none", display: "flex", alignItems: "center", gap: "4px" }}>
                   View all <ArrowRight style={{ width: "12px", height: "12px" }} />
                 </Link>
@@ -116,7 +116,7 @@ function HomeContent() {
               ) : (
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   {recentMeetings.map((m, i) => (
-                    <Link key={m.id} href={`/meetings/${m.id}`} style={{ textDecoration: "none", color: "inherit", display: "flex", alignItems: "center", padding: "12px 20px", gap: "12px", borderBottom: i < recentMeetings.length - 1 ? "1px solid var(--ff-border)" : "none", transition: "background 0.15s" }} onMouseEnter={e => e.currentTarget.style.background = "var(--ff-bg)"} onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
+                    <Link key={m.id} href={`/meetings/${m.id}`} style={{ textDecoration: "none", color: "inherit", display: "flex", alignItems: "center", padding: "12px 20px", gap: "12px", borderBottom: i < recentMeetings.length - 1 ? "1px solid var(--ff-border)" : "none", transition: "all 0.15s", borderLeft: "3px solid transparent" }} onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-bg)"; e.currentTarget.style.borderLeftColor = "var(--ff-green)"; }} onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderLeftColor = "transparent"; }}>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <p style={{ fontSize: "13px", fontWeight: 600, color: "var(--ff-text)", margin: "0 0 2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.title}</p>
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -144,24 +144,24 @@ function HomeContent() {
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
 
               {/* Quick Actions */}
-              <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "14px", padding: "18px 20px" }}>
-                <h3 style={{ fontSize: "14px", fontWeight: 700, color: "var(--ff-text)", margin: "0 0 14px", fontFamily: "'DM Sans', sans-serif" }}>Quick Actions</h3>
+              <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "18px", padding: "24px 26px", boxShadow: "var(--ff-shadow-card)" }}>
+                <h3 style={{ fontSize: "16px", fontWeight: 800, color: "var(--ff-text)", margin: "0 0 18px", fontFamily: "'DM Sans', sans-serif" }}>Quick Actions</h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                  <button onClick={() => window.dispatchEvent(new CustomEvent("open-new-meeting"))} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 14px", borderRadius: "8px", border: "1px solid var(--ff-border)", background: "var(--ff-white)", cursor: "pointer", fontSize: "12px", fontWeight: 600, color: "var(--ff-text)", transition: "all 0.15s", width: "100%", textAlign: "left" }} onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-green-light)"; e.currentTarget.style.borderColor = "#b2e8d8"; }} onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-white)"; e.currentTarget.style.borderColor = "var(--ff-border)"; }}>
+                  <button onClick={() => window.dispatchEvent(new CustomEvent("open-new-meeting"))} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 16px", borderRadius: "12px", border: "1px solid var(--ff-border)", background: "var(--ff-white)", cursor: "pointer", fontSize: "13px", fontWeight: 600, color: "var(--ff-text)", transition: "all 0.15s", width: "100%", textAlign: "left", boxShadow: "var(--ff-shadow-sm)" }} onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-green-light)"; e.currentTarget.style.borderColor = "#b2e8d8"; }} onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-white)"; e.currentTarget.style.borderColor = "var(--ff-border)"; }}>
                     <Plus style={{ width: "14px", height: "14px", color: "var(--ff-green)" }} /> New Meeting
                   </button>
-                  <Link href="/" style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 14px", borderRadius: "8px", border: "1px solid var(--ff-border)", background: "var(--ff-white)", fontSize: "12px", fontWeight: 600, color: "var(--ff-text)", textDecoration: "none", transition: "all 0.15s" }} onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-bg)"; }} onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-white)"; }}>
+                  <Link href="/" style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 16px", borderRadius: "12px", border: "1px solid var(--ff-border)", background: "var(--ff-white)", fontSize: "13px", fontWeight: 600, color: "var(--ff-text)", textDecoration: "none", transition: "all 0.15s", boxShadow: "var(--ff-shadow-sm)" }} onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-bg)"; }} onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-white)"; }}>
                     <Mic2 style={{ width: "14px", height: "14px", color: "var(--ff-text-3)" }} /> Browse Meetings
                   </Link>
-                  <Link href="/tasks" style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 14px", borderRadius: "8px", border: "1px solid var(--ff-border)", background: "var(--ff-white)", fontSize: "12px", fontWeight: 600, color: "var(--ff-text)", textDecoration: "none", transition: "all 0.15s" }} onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-bg)"; }} onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-white)"; }}>
+                  <Link href="/tasks" style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 16px", borderRadius: "12px", border: "1px solid var(--ff-border)", background: "var(--ff-white)", fontSize: "13px", fontWeight: 600, color: "var(--ff-text)", textDecoration: "none", transition: "all 0.15s", boxShadow: "var(--ff-shadow-sm)" }} onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-bg)"; }} onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-white)"; }}>
                     <CheckSquare style={{ width: "14px", height: "14px", color: "var(--ff-text-3)" }} /> View Tasks
                   </Link>
                 </div>
               </div>
 
               {/* Top Participants */}
-              <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "14px", padding: "18px 20px" }}>
-                <h3 style={{ fontSize: "14px", fontWeight: 700, color: "var(--ff-text)", margin: "0 0 14px", fontFamily: "'DM Sans', sans-serif" }}>Top Participants</h3>
+              <div style={{ background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "18px", padding: "24px 26px", boxShadow: "var(--ff-shadow-card)" }}>
+                <h3 style={{ fontSize: "16px", fontWeight: 800, color: "var(--ff-text)", margin: "0 0 18px", fontFamily: "'DM Sans', sans-serif" }}>Top Participants</h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                   {Array.from(allParticipants).slice(0, 5).map((name, i) => {
                     const c = avatarColors[i % avatarColors.length];
@@ -172,10 +172,10 @@ function HomeContent() {
                         <div style={{ width: "26px", height: "26px", borderRadius: "50%", background: c.bg, color: c.text, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", fontWeight: 700, flexShrink: 0 }}>{name.split(" ").map(n => n[0]).join("")}</div>
                         <div style={{ flex: 1, minWidth: 0 }}>
                           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "3px" }}>
-                            <span style={{ fontSize: "11px", fontWeight: 600, color: "var(--ff-text)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{name}</span>
+                            <span style={{ fontSize: "12px", fontWeight: 600, color: "var(--ff-text)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{name}</span>
                             <span style={{ fontSize: "10px", fontWeight: 600, color: "var(--ff-text-3)" }}>{count}</span>
                           </div>
-                          <div style={{ height: "4px", borderRadius: "4px", background: "var(--ff-bg)", overflow: "hidden" }}>
+                           <div style={{ height: "5px", borderRadius: "3px", background: "var(--ff-bg)", overflow: "hidden" }}>
                             <div style={{ height: "100%", width: `${barWidth}%`, borderRadius: "4px", background: c.text, transition: "width 0.3s" }} />
                           </div>
                         </div>

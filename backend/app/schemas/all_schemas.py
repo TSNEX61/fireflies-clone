@@ -144,26 +144,6 @@ class MeetingResponse(MeetingBase):
     class Config:
         from_attributes = True
 
-# Full Meeting Detail Response
-class MeetingDetailResponse(MeetingResponse):
-    transcript_segments: List[TranscriptSegmentResponse]
-    summary: Optional[SummaryResponse] = None
-    topics: List[TopicResponse]
-    action_items: List[ActionItemResponse]
-    bookmarks: List[BookmarkResponse] = []
-    comments: List[CommentResponse] = []
-    soundbites: List[SoundbiteResponse] = []
-
-    class Config:
-        from_attributes = True
-
-# Search segment item response
-class TranscriptSearchMatch(BaseModel):
-    segment: TranscriptSegmentResponse
-    context_before: List[TranscriptSegmentResponse]
-    context_after: List[TranscriptSegmentResponse]
-
-
 # Bookmark Schemas
 class BookmarkCreate(BaseModel):
     meeting_id: int
@@ -219,3 +199,23 @@ class SoundbiteResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+# Full Meeting Detail Response
+class MeetingDetailResponse(MeetingResponse):
+    transcript_segments: List[TranscriptSegmentResponse]
+    summary: Optional[SummaryResponse] = None
+    topics: List[TopicResponse]
+    action_items: List[ActionItemResponse]
+    bookmarks: List[BookmarkResponse] = []
+    comments: List[CommentResponse] = []
+    soundbites: List[SoundbiteResponse] = []
+
+    class Config:
+        from_attributes = True
+
+# Search segment item response
+class TranscriptSearchMatch(BaseModel):
+    segment: TranscriptSegmentResponse
+    context_before: List[TranscriptSegmentResponse]
+    context_after: List[TranscriptSegmentResponse]

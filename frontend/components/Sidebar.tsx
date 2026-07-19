@@ -75,20 +75,21 @@ export default function Sidebar() {
         onClick={() => { setActiveIdx(i); closeSidebar(); }}
         style={{
           display: "flex", alignItems: "center", gap: "10px",
-          padding: "8px 12px 8px 14px", borderRadius: "6px", textDecoration: "none",
-          background: isActive ? "rgba(0,195,137,0.12)" : "transparent",
+          padding: "9px 14px 9px 16px", borderRadius: "8px", textDecoration: "none",
+          background: isActive ? "rgba(0,195,137,0.15)" : "transparent",
           color: isActive ? "#00C389" : "rgba(255,255,255,0.55)",
           fontSize: "13px", fontWeight: 600, transition: "all 0.15s",
           position: "relative",
+          ...(isActive ? { boxShadow: "inset 0 0 0 1px rgba(0,195,137,0.1)" } : {}),
         }}
-        onMouseEnter={(e) => { if (!isActive) { e.currentTarget.style.color = "rgba(255,255,255,0.9)"; e.currentTarget.style.background = "rgba(255,255,255,0.06)"; } }}
-        onMouseLeave={(e) => { if (!isActive) { e.currentTarget.style.color = "rgba(255,255,255,0.55)"; e.currentTarget.style.background = "transparent"; } }}
+        onMouseEnter={(e) => { if (!isActive) { e.currentTarget.style.color = "rgba(255,255,255,0.9)"; e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.transform = "translateX(2px)"; } }}
+        onMouseLeave={(e) => { if (!isActive) { e.currentTarget.style.color = "rgba(255,255,255,0.55)"; e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateX(0)"; } }}
       >
         {isActive && (
           <div style={{
             position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)",
-            width: "3px", height: "18px", borderRadius: "0 3px 3px 0",
-            background: "#00C389",
+            width: "3px", height: "22px", borderRadius: "0 3px 3px 0",
+            background: "#00C389", boxShadow: "0 0 8px rgba(0,195,137,0.4)",
           }} />
         )}
         <Icon size={16} style={{ flexShrink: 0, opacity: isActive ? 1 : 0.7 }} />
@@ -134,8 +135,8 @@ export default function Sidebar() {
         ref={sidebarRef}
         style={{
           position: "fixed", left: 0, top: 0, zIndex: 30,
-          width: "220px", height: "100vh",
-          background: "#141821",
+          width: "232px", height: "100vh",
+          background: "linear-gradient(180deg, #121620 0%, #141821 50%, #161b28 100%)",
           borderRight: "1px solid rgba(255,255,255,0.06)",
           display: "flex", flexDirection: "column",
           overflow: "hidden",
@@ -145,8 +146,8 @@ export default function Sidebar() {
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "16px 16px 14px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ width: "28px", height: "28px", borderRadius: "7px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, color: "#fff", fontSize: "10px", background: "#00C389" }}>ff</div>
-          <span style={{ fontWeight: 700, fontSize: "15px", letterSpacing: "-0.02em", color: "#fff", fontFamily: "'DM Sans', sans-serif" }}>fireflies</span>
+          <div style={{ width: "28px", height: "28px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, color: "#fff", fontSize: "10px", background: "#00C389", boxShadow: "0 2px 8px rgba(0,195,137,0.3)" }}>ff</div>
+          <span style={{ fontWeight: 700, fontSize: "16px", letterSpacing: "-0.03em", color: "#fff", fontFamily: "'DM Sans', sans-serif" }}>fireflies</span>
         </div>
 
         {/* Primary nav */}
@@ -165,10 +166,10 @@ export default function Sidebar() {
           <button
             style={{
               display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
-              width: "100%", padding: "9px 0", borderRadius: "8px",
+              width: "100%", padding: "10px 0", borderRadius: "10px",
               background: "#00C389", color: "#fff",
               border: "none", fontSize: "13px", fontWeight: 700, cursor: "pointer",
-              transition: "all 0.15s",
+              transition: "all 0.15s", boxShadow: "0 4px 14px rgba(0,195,137,0.3)",
             }}
             onClick={() => { window.dispatchEvent(new CustomEvent("open-new-meeting")); setOpen(false); }}
             onMouseEnter={(e) => { e.currentTarget.style.background = "#00a876"; }}
@@ -180,10 +181,11 @@ export default function Sidebar() {
         </div>
 
         {/* User */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 14px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 14px", borderTop: "1px solid rgba(255,255,255,0.06)", position: "relative" }}>
+          <div style={{ position: "absolute", top: 0, left: "14px", right: "14px", height: "1px", background: "linear-gradient(90deg, transparent 0%, rgba(0,195,137,0.15) 50%, transparent 100%)" }} />
           <div style={{ position: "relative", flexShrink: 0 }}>
-            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Alex" style={{ width: "30px", height: "30px", borderRadius: "50%", border: "2px solid rgba(255,255,255,0.1)" }} />
-            <div style={{ position: "absolute", bottom: "0", right: "0", width: "8px", height: "8px", borderRadius: "50%", background: "#00C389", border: "2px solid #141821" }} />
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Alex" style={{ width: "30px", height: "30px", borderRadius: "50%", border: "2px solid rgba(255,255,255,0.15)" }} />
+            <div style={{ position: "absolute", bottom: "0", right: "0", width: "8px", height: "8px", borderRadius: "50%", background: "#00C389", border: "2px solid #141821", boxShadow: "0 0 6px rgba(0,195,137,0.5)" }} />
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <p style={{ fontSize: "12px", fontWeight: 600, color: "rgba(255,255,255,0.9)", lineHeight: "1.3", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>Alex Sterling</p>

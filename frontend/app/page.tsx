@@ -82,7 +82,8 @@ function MeetingCard({ meeting, onEdit, onDelete, isFavorite, onToggleFavorite }
         display: "flex", flexDirection: "column",
         background: "var(--ff-white)",
         border: "1px solid var(--ff-border)",
-        borderRadius: "12px",
+        borderRadius: "16px",
+        boxShadow: "var(--ff-shadow-card)",
         textDecoration: "none", color: "inherit",
         transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
         cursor: "pointer",
@@ -90,19 +91,19 @@ function MeetingCard({ meeting, onEdit, onDelete, isFavorite, onToggleFavorite }
       }}
       onMouseEnter={e => {
         e.currentTarget.style.borderColor = "#d0d5dd";
-        e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.06)";
-        e.currentTarget.style.transform = "translateY(-2px)";
+        e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04)";
+        e.currentTarget.style.transform = "translateY(-3px)";
       }}
       onMouseLeave={e => {
         e.currentTarget.style.borderColor = "var(--ff-border)";
-        e.currentTarget.style.boxShadow = "none";
+        e.currentTarget.style.boxShadow = "var(--ff-shadow-card)";
         e.currentTarget.style.transform = "translateY(0)";
       }}
     >
       {/* Card Header */}
-      <div style={{ padding: "16px 18px 12px", display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+      <div style={{ padding: "22px 24px 16px", display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <h3 style={{ fontSize: "14px", fontWeight: 700, color: "var(--ff-text)", margin: "0 0 4px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: "'DM Sans', sans-serif" }}>
+          <h3 style={{ fontSize: "16px", fontWeight: 800, color: "var(--ff-text)", margin: "0 0 4px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: "'DM Sans', sans-serif" }}>
             {meeting.title}
           </h3>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "11px", color: "var(--ff-text-3)", fontWeight: 500 }}>
@@ -161,7 +162,7 @@ function MeetingCard({ meeting, onEdit, onDelete, isFavorite, onToggleFavorite }
       )}
 
       {/* Card Footer: participants + tags */}
-      <div style={{ padding: "10px 18px", borderTop: "1px solid var(--ff-border)", display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--ff-bg)", marginTop: "auto" }}>
+      <div style={{ padding: "14px 24px", borderTop: "1px solid var(--ff-border)", display: "flex", alignItems: "center", justifyContent: "space-between", background: "#f8f9fc", marginTop: "auto" }}>
         <div style={{ display: "flex", alignItems: "center" }}>
           {meeting.participants.slice(0, 4).map((p, i) => (
             <div key={p.id} title={p.name} style={{
@@ -284,31 +285,31 @@ function MeetingsLibraryContent() {
   const meetingCount = filteredMeetings.length;
 
   return (
-    <div style={{ display: "flex", background: "var(--ff-bg)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ display: "flex", background: "linear-gradient(160deg, #e8ecf4 0%, #dde1ea 30%, #e4e8f2 70%, #eaeef6 100%)", minHeight: "100vh", color: "var(--ff-text)", fontFamily: "'Inter', sans-serif" }}>
       <Sidebar />
       <div style={{ flex: 1, marginLeft: "0", paddingTop: "56px", display: "flex", flexDirection: "column" }}>
         <Navbar />
 
-        <main style={{ flex: 1, display: "flex", flexDirection: "column", padding: "28px 36px", maxWidth: "1100px", width: "100%", margin: "0 auto" }}>
+        <main style={{ flex: 1, display: "flex", flexDirection: "column", padding: "48px 56px", maxWidth: "1140px", width: "100%", margin: "0 auto" }}>
           {/* Header */}
-          <div style={{ marginBottom: "20px" }}>
-            <h1 style={{ fontSize: "22px", fontWeight: 800, color: "var(--ff-text)", margin: "0 0 4px 0", fontFamily: "'DM Sans', sans-serif" }}>
+          <div style={{ marginBottom: "40px" }}>
+            <h1 style={{ fontSize: "36px", fontWeight: 900, letterSpacing: "-0.02em", color: "var(--ff-text)", margin: "0 0 8px 0", fontFamily: "'DM Sans', sans-serif" }}>
               Meetings
             </h1>
-            <p style={{ fontSize: "13px", color: "var(--ff-text-3)", margin: 0, fontWeight: 500 }}>
+            <p style={{ fontSize: "15px", color: "var(--ff-text-3)", margin: "4px 0 0 0", fontWeight: 500 }}>
               {meetingCount} meeting{meetingCount !== 1 ? "s" : ""} in workspace
             </p>
           </div>
 
           {/* Quick filter tabs + Search row */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px", gap: "12px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "36px", gap: "12px" }}>
             <div style={{ display: "flex", gap: "2px", borderBottom: "2px solid var(--ff-border)", flexShrink: 0 }}>
               {quickFilterTabs.map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => setQuickFilter(tab.key)}
                   style={{
-                    padding: "10px 16px", fontSize: "13px", fontWeight: 700, border: "none",
+                    padding: "10px 16px", fontSize: "13px", fontWeight: 600, border: "none",
                     borderBottomWidth: "2px", borderBottomStyle: "solid",
                     borderBottomColor: quickFilter === tab.key ? "var(--ff-green)" : "transparent",
                     marginBottom: "-2px",
@@ -326,14 +327,14 @@ function MeetingsLibraryContent() {
                 <Search style={{ width: "14px", height: "14px", color: "var(--ff-text-3)", position: "absolute", left: "10px", top: "50%", transform: "translateY(-50%)" }} />
                 <input
                   type="text" placeholder="Search meetings..." value={search} onChange={e => setSearch(e.target.value)}
-                  style={{ width: "100%", padding: "8px 12px 8px 32px", border: "1px solid var(--ff-border)", borderRadius: "8px", fontSize: "12px", fontWeight: 600, outline: "none", background: "var(--ff-white)", color: "var(--ff-text)", transition: "all 0.2s" }}
+                  style={{ width: "100%", padding: "10px 14px 10px 36px", border: "1px solid var(--ff-border)", borderRadius: "10px", fontSize: "13px", fontWeight: 600, outline: "none", background: "var(--ff-white)", color: "var(--ff-text)", transition: "all 0.2s" }}
                   onFocus={e => { e.currentTarget.style.borderColor = "var(--ff-green)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,195,137,0.08)"; }}
                   onBlur={e => { e.currentTarget.style.borderColor = "var(--ff-border)"; e.currentTarget.style.boxShadow = "none"; }}
                 />
               </div>
               <button
                 onClick={() => setIsModalOpen(true)}
-                style={{ padding: "8px 16px", background: "var(--ff-green)", color: "#fff", border: "none", borderRadius: "8px", fontSize: "12px", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", flexShrink: 0, transition: "all 0.2s", boxShadow: "0 2px 8px rgba(0,195,137,0.2)" }}
+                style={{ padding: "10px 20px", background: "var(--ff-green)", color: "#fff", border: "none", borderRadius: "12px", fontSize: "13px", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", flexShrink: 0, transition: "all 0.2s", boxShadow: "0 4px 14px rgba(0,195,137,0.25)" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "var(--ff-green-hover)"; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "var(--ff-green)"; }}
               >
@@ -354,7 +355,7 @@ function MeetingsLibraryContent() {
               <ChevronDown style={{ width: "10px", height: "10px", transform: showAdvanced ? "rotate(180deg)" : "none", transition: "transform 0.2s" }} />
             </button>
             {showAdvanced && (
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "8px", padding: "10px 14px", background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "10px", animation: "fadeIn 0.2s ease-out" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "8px", padding: "10px 14px", background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "12px", boxShadow: "var(--ff-shadow-sm)", animation: "fadeIn 0.2s ease-out" }}>
                 <div style={{ position: "relative" }}>
                   <Users style={{ width: "12px", height: "12px", color: "var(--ff-text-3)", position: "absolute", left: "8px", top: "50%", transform: "translateY(-50%)" }} />
                   <select value={selectedParticipant} onChange={e => setSelectedParticipant(e.target.value)}
@@ -387,13 +388,13 @@ function MeetingsLibraryContent() {
 
           {/* Meeting card grid */}
           {loading ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "14px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "16px" }}>
               {[...Array(6)].map((_, i) => (
-                <div key={i} style={{ height: "180px", background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "12px", animation: "shimmer 1.5s infinite", backgroundSize: "200% 100%" }} />
+                <div key={i} style={{ height: "200px", background: "var(--ff-white)", border: "1px solid var(--ff-border)", borderRadius: "16px", animation: "shimmer 1.5s infinite", backgroundSize: "200% 100%" }} />
               ))}
             </div>
           ) : filteredMeetings.length === 0 ? (
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 0", textAlign: "center" }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "120px 0", textAlign: "center" }}>
               <div style={{ width: "56px", height: "56px", borderRadius: "16px", background: "var(--ff-green-light)", color: "var(--ff-green)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
                 <Mic2 style={{ width: "28px", height: "28px" }} />
               </div>
@@ -413,13 +414,13 @@ function MeetingsLibraryContent() {
               </button>
             </div>
           ) : (
-            <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
               {grouped.map((group) => (
                 <div key={group.label}>
-                  <h4 style={{ fontSize: "11px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "10px", paddingLeft: "4px" }}>
+                  <h4 style={{ fontSize: "12px", fontWeight: 700, color: "var(--ff-text-3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px", paddingLeft: "4px" }}>
                     {group.label}
                   </h4>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "14px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "20px" }}>
                     {group.meetings.map((m) => (
                       <MeetingCard key={m.id} meeting={m} onEdit={() => setEditMeeting(m)} onDelete={() => handleDeleteMeeting(m.id)} isFavorite={favorites.has(m.id)} onToggleFavorite={() => toggleFavorite(m.id)} />
                     ))}
